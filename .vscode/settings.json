@@ -1,0 +1,10 @@
+{
+    "files.exclude": {
+        "**/*.js": true,
+        "**/*.map": true,
+        "**/*.exe": true,
+        "**/*linux": true,
+        "**/*macos": true,
+    },
+    "typescript.tsdk": "node_modules\\typescript\\lib"
+}
