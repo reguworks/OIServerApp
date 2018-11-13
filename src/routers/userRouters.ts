@@ -1,7 +1,16 @@
 import * as express from 'express';
+import { userController } from '../controllers/userController';
+import { dbService } from "../db/dbService";
 
 class userRouter {
     public router = express.Router();
+    private controller: userController = new userController(new dbService({
+        host: 'localhost',
+        port: '3306',
+        user: 'app',
+        password: '1234',
+        database: 'insurance'
+    }));
 
     constructor() {
         this.configHomePage();
@@ -16,10 +25,7 @@ class userRouter {
     }
 
     private configReadByID(): void {
-        this.router.get('/:id', function (req, res) {
-            //res.send('API works again!')
-            //Call a method to call StoredProcedure to select by ID. This must be done in a controller.
-        });
+        this.router.get('/users', this.controller.getAllUsers);
     }
 }
 export default new userRouter().router;

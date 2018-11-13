@@ -18,7 +18,7 @@ class App {
         this.app.use(cors()); 
 
         //Create routers for all subroutes
-        this.app.use('/user',userRouters);
+        this.app.use('/user', userRouters);
     }
 }
 
