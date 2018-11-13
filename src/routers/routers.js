@@ -14,4 +14,4 @@ var userRouter = /** @class */ (function () {
     return userRouter;
 }());
 exports.default = new userRouter().router;
-//# sourceMappingURL=userRouter.js.map
+//# sourceMappingURL=routers.js.map
