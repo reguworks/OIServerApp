@@ -11,3 +11,5 @@ router.get('/', function (req, res) {
 router.get('/users', controller.getAllUsers);
 
 export default router;
+
+//will make it like this: https://github.com/LaurenceHo/angular4-express-mysql/tree/master/server/src
