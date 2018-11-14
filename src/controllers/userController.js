@@ -35,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var dbService = require("../db/dbConnection");
 var userController = /** @class */ (function () {
     function userController(dbService) {
         this.dbService = dbService;
@@ -69,7 +70,7 @@ var userController = /** @class */ (function () {
                         console.log("Error " + error_1);
                         return [3 /*break*/, 3];
                     case 3:
-                        res.json();
+                        res.json(users);
                         return [2 /*return*/];
                 }
             });
@@ -77,5 +78,5 @@ var userController = /** @class */ (function () {
     };
     return userController;
 }());
-exports.userController = userController;
+exports.default = new userController(dbService);
 //# sourceMappingURL=userController.js.map

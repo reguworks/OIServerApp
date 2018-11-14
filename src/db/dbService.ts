@@ -16,7 +16,7 @@ export class dbService {
         return this.mysqlConnection.close()
     }
 
-    public async getAllUsers() {
+    async getAllUsers() {
         return this.mysqlConnection.query('SELECT * FROM USERS;')
     }
     // this.mysqlConnection.connect((err)=>{
@@ -27,3 +27,5 @@ export class dbService {
     //         console.log('DB connection failed: ' + JSON.stringify(err, undefined, 2));
     // });
 }
+
+

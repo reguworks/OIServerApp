@@ -1,31 +1,13 @@
 import * as express from 'express';
-import { userController } from '../controllers/userController';
-import { dbService } from "../db/dbService";
+import userController from '../controllers/userController';
 
-class userRouter {
-    public router = express.Router();
-    private controller: userController = new userController(new dbService({
-        host: 'localhost',
-        port: '3306',
-        user: 'app',
-        password: '1234',
-        database: 'insurance'
-    }));
+const controller = userController;
+const router = express.Router();
 
-    constructor() {
-        this.configHomePage();
-        this.configReadByID();
-    }
+router.get('/', function (req, res) {
+    res.send('API works!')
+    //Call a method to call StoredProcedure to select all users. This must be done in a controller.
+});
+router.get('/users', controller.getAllUsers);
 
-    private configHomePage(): void {
-        this.router.get('/', function (req, res) {
-            //res.send('API works!')
-            //Call a method to call StoredProcedure to select all users. This must be done in a controller.
-        });
-    }
-
-    private configReadByID(): void {
-        this.router.get('/users', this.controller.getAllUsers);
-    }
-}
-export default new userRouter().router;
+export default router;

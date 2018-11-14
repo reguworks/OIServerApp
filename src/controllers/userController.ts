@@ -1,10 +1,11 @@
-import { dbService } from "../db/dbService";
+import { Request, Response } from 'express';
+import * as dbService from "../db/dbConnection";
 
-export class userController {
+ class userController {
 
     private dbService;
     
-    constructor(dbService: dbService) {
+    constructor(dbService: any) {
         this.dbService = dbService;
         
     }
@@ -26,8 +27,7 @@ export class userController {
             console.log("Error " + error);
         }
 
-        res.json()
+        res.json(users);
     }
 }
-
-
+ export default new userController(dbService)
