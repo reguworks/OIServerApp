@@ -1,5 +1,5 @@
 import * as mysql from 'mysql';
-import { dbService } from "../db/dbService";
+import dbService from "../db/dbService";
 
 // Don't actually connect here
 // Just create the object so it's ready for connection.

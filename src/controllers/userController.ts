@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import * as dbService from "../db/dbConnection";
+import dbService from "../db/dbConnection";
 
  class userController {
 

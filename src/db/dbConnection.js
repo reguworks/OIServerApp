@@ -13,5 +13,5 @@ var connection = new mysql.createConnection({
 });
 // Wire up the internal db connection
 // Remember this is a singleton.
-exports.default = new dbService_1.dbService(connection);
+exports.default = new dbService_1.default(connection);
 //# sourceMappingURL=dbConnection.js.map

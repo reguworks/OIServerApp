@@ -35,7 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dbService = require("../db/dbConnection");
+var dbConnection_1 = require("../db/dbConnection");
 var userController = /** @class */ (function () {
     function userController(dbService) {
         this.dbService = dbService;
@@ -78,5 +78,5 @@ var userController = /** @class */ (function () {
     };
     return userController;
 }());
-exports.default = new userController(dbService);
+exports.default = new userController(dbConnection_1.default);
 //# sourceMappingURL=userController.js.map

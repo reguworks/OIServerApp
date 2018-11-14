@@ -63,4 +63,5 @@ var dbService = /** @class */ (function () {
     return dbService;
 }());
 exports.dbService = dbService;
+exports.default = dbService;
 //# sourceMappingURL=dbService.js.map
