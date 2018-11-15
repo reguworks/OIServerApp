@@ -47,11 +47,13 @@ var UserController = /** @class */ (function () {
                         conn.query("select * from users", function (err, result, fields) {
                             if (err) {
                                 conn.release();
-                                throw err;
+                                res.json(err);
                             }
-                            console.log(result);
-                            res.json(result);
-                            conn.release();
+                            else {
+                                console.log(result);
+                                res.json(result);
+                                conn.release();
+                            }
                         });
                     });
                 }
@@ -74,11 +76,13 @@ var UserController = /** @class */ (function () {
                         conn.query("INSERT INTO users (id, username) VALUES ('" + id.toString() + "','" + username.toString() + "')", function (err, result, fields) {
                             if (err) {
                                 conn.release();
-                                throw err;
+                                res.json(err);
                             }
-                            console.log(result);
-                            res.json(result);
-                            conn.release();
+                            else {
+                                console.log(result);
+                                res.json(result);
+                                conn.release();
+                            }
                         });
                     });
                 }
@@ -101,11 +105,13 @@ var UserController = /** @class */ (function () {
                         conn.query("update users set username='" + username.toString() + "' where id='" + id.toString() + "'", function (err, result, fields) {
                             if (err) {
                                 conn.release();
-                                throw err;
+                                res.json(err);
                             }
-                            console.log(result);
-                            res.json(result);
-                            conn.release();
+                            else {
+                                console.log(result);
+                                res.json(result);
+                                conn.release();
+                            }
                         });
                     });
                 }
@@ -128,11 +134,13 @@ var UserController = /** @class */ (function () {
                         conn.query("delete from users where id='" + id.toString() + "'", function (err, result, fields) {
                             if (err) {
                                 conn.release();
-                                throw err;
+                                res.json(err);
                             }
-                            console.log(result);
-                            res.json(result);
-                            conn.release();
+                            else {
+                                console.log(result);
+                                res.json(result);
+                                conn.release();
+                            }
                         });
                     });
                 }

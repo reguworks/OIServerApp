@@ -13,12 +13,13 @@ export class UserController {
                     , function (err, result, fields) {
                     if (err) {
                         conn.release();
-                        throw err;
+                        res.json(err);
                     }
-                        
-                    console.log(result);
-                    res.json(result);
-                    conn.release();
+                    else {
+                        console.log(result);
+                        res.json(result);
+                        conn.release();
+                    }
                 })
             })
 
@@ -37,12 +38,13 @@ export class UserController {
                     , function (err, result, fields) {
                     if (err) {
                         conn.release();
-                        throw err;
+                        res.json(err);
                     }
-                        
-                    console.log(result);
-                    res.json(result);
-                    conn.release();
+                    else {
+                        console.log(result);
+                        res.json(result);
+                        conn.release();
+                    }
                 })
             })
 
@@ -61,12 +63,13 @@ export class UserController {
                     , function (err, result, fields) {
                     if (err) {
                         conn.release();
-                        throw err;
+                        res.json(err);
                     }
-                        
-                    console.log(result);
-                    res.json(result);
-                    conn.release();
+                    else {
+                        console.log(result);
+                        res.json(result);
+                        conn.release();
+                    }
                 })
             })
 
@@ -85,12 +88,13 @@ export class UserController {
                     , function (err, result, fields) {
                     if (err) {
                         conn.release();
-                        throw err;
+                        res.json(err);
                     }
-                        
-                    console.log(result);
-                    res.json(result);
-                    conn.release();
+                    else {
+                        console.log(result);
+                        res.json(result);
+                        conn.release();
+                    }
                 })
             })
 
