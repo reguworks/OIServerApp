@@ -90,6 +90,60 @@ var UserController = /** @class */ (function () {
             });
         });
     };
+    UserController.prototype.updateUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var username, id;
+            return __generator(this, function (_a) {
+                username = req.body.username;
+                id = req.body.id;
+                try {
+                    db_1.default.getConnection(function (err, conn) {
+                        conn.query("update users set username='" + username.toString() + "' where id='" + id.toString() + "'", function (err, result, fields) {
+                            if (err) {
+                                conn.release();
+                                throw err;
+                            }
+                            console.log(result);
+                            res.json(result);
+                            conn.release();
+                        });
+                    });
+                }
+                catch (error) {
+                    console.log("Error " + error);
+                    res.json(error);
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    UserController.prototype.deleteUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var username, id;
+            return __generator(this, function (_a) {
+                username = req.body.username;
+                id = req.body.id;
+                try {
+                    db_1.default.getConnection(function (err, conn) {
+                        conn.query("delete from users where id='" + id.toString() + "'", function (err, result, fields) {
+                            if (err) {
+                                conn.release();
+                                throw err;
+                            }
+                            console.log(result);
+                            res.json(result);
+                            conn.release();
+                        });
+                    });
+                }
+                catch (error) {
+                    console.log("Error " + error);
+                    res.json(error);
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
     return UserController;
 }());
 exports.UserController = UserController;

@@ -7,6 +7,8 @@ export class UserRoutes {
         app.route('/users')
         .get(this.controller.getAllUsers)
         .post(this.controller.createUser)
+        .put(this.controller.updateUser)
+        .delete(this.controller.deleteUser)
     }
 }
 
