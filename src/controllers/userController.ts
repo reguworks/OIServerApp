@@ -1,33 +1,28 @@
 import { Request, Response } from 'express';
-import dbService from "../db/dbConnection";
+import connection from '../db/db';
 
- class userController {
-
-    private dbService;
-    
-    constructor(dbService: any) {
-        this.dbService = dbService;
-        
-    }
-
-    async connect() {
-        return this.dbService.openConnection()
-    }
-
-    async close() {
-        return this.dbService.closeConnection()
+export class UserController {
+    constructor() {
     }
 
     async getAllUsers(req: Request, res: Response) {
-        let users
-
         try {
-            users = await this.dbService.getAllUsers();
+            connection.getConnection(function (err, conn) {
+                conn.query("select * from users", function (err, result, fields) {
+                    if (err)
+                        throw err;
+                        
+                    console.log(result);
+                    res.json(result);
+                    conn.release();
+                })
+            })
+
         } catch (error) {
             console.log("Error " + error);
         }
 
-        res.json(users);
+
     }
 }
- export default new userController(dbService)
+

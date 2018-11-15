@@ -35,48 +35,32 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var dbConnection_1 = require("../db/dbConnection");
-var userController = /** @class */ (function () {
-    function userController(dbService) {
-        this.dbService = dbService;
+var db_1 = require("../db/db");
+var UserController = /** @class */ (function () {
+    function UserController() {
     }
-    userController.prototype.connect = function () {
+    UserController.prototype.getAllUsers = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                return [2 /*return*/, this.dbService.openConnection()];
-            });
-        });
-    };
-    userController.prototype.close = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, this.dbService.closeConnection()];
-            });
-        });
-    };
-    userController.prototype.getAllUsers = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var users, error_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.dbService.getAllUsers()];
-                    case 1:
-                        users = _a.sent();
-                        return [3 /*break*/, 3];
-                    case 2:
-                        error_1 = _a.sent();
-                        console.log("Error " + error_1);
-                        return [3 /*break*/, 3];
-                    case 3:
-                        res.json(users);
-                        return [2 /*return*/];
+                try {
+                    db_1.default.getConnection(function (err, conn) {
+                        conn.query("select * from users", function (err, result, fields) {
+                            if (err)
+                                throw err;
+                            console.log(result);
+                            res.json(result);
+                            conn.release();
+                        });
+                    });
                 }
+                catch (error) {
+                    console.log("Error " + error);
+                }
+                return [2 /*return*/];
             });
         });
     };
-    return userController;
+    return UserController;
 }());
-exports.default = new userController(dbConnection_1.default);
+exports.UserController = UserController;
 //# sourceMappingURL=userController.js.map
