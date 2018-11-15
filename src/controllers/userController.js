@@ -63,4 +63,4 @@ var UserController = /** @class */ (function () {
     return UserController;
 }());
 exports.UserController = UserController;
-//# sourceMappingURL=userController.js.map
+//# sourceMappingURL=UserController.js.map
