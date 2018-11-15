@@ -21,8 +21,6 @@ export class UserController {
         } catch (error) {
             console.log("Error " + error);
         }
-
-
     }
 }
 
