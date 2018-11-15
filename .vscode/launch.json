@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceRoot}/src/server.js",
+            "program": "${workspaceRoot}/dist/server.js",
             //"console": "integratedTerminal"
             "outputCapture": "std"
         }
