@@ -7,7 +7,8 @@ var UserRoutes = /** @class */ (function () {
     }
     UserRoutes.prototype.routes = function (app) {
         app.route('/users')
-            .get(this.controller.getAllUsers);
+            .get(this.controller.getAllUsers)
+            .post(this.controller.createUser);
     };
     return UserRoutes;
 }());

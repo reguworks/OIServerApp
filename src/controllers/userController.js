@@ -45,8 +45,10 @@ var UserController = /** @class */ (function () {
                 try {
                     db_1.default.getConnection(function (err, conn) {
                         conn.query("select * from users", function (err, result, fields) {
-                            if (err)
+                            if (err) {
+                                conn.release();
                                 throw err;
+                            }
                             console.log(result);
                             res.json(result);
                             conn.release();
@@ -55,6 +57,34 @@ var UserController = /** @class */ (function () {
                 }
                 catch (error) {
                     console.log("Error " + error);
+                    res.json(error);
+                }
+                return [2 /*return*/];
+            });
+        });
+    };
+    UserController.prototype.createUser = function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var username, id;
+            return __generator(this, function (_a) {
+                username = req.body.username;
+                id = req.body.id;
+                try {
+                    db_1.default.getConnection(function (err, conn) {
+                        conn.query("INSERT INTO users (id, username) VALUES ('" + id.toString() + "','" + username.toString() + "')", function (err, result, fields) {
+                            if (err) {
+                                conn.release();
+                                throw err;
+                            }
+                            console.log(result);
+                            res.json(result);
+                            conn.release();
+                        });
+                    });
+                }
+                catch (error) {
+                    console.log("Error " + error);
+                    res.json(error);
                 }
                 return [2 /*return*/];
             });

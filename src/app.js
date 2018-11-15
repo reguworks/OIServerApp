@@ -6,7 +6,6 @@ var cors = require("cors");
 var UserRoutes_1 = require("./routers/UserRoutes");
 var App = /** @class */ (function () {
     function App() {
-        this.routes = new UserRoutes_1.UserRoutes();
         this.userRoutes = new UserRoutes_1.UserRoutes();
         this.app = express();
         this.config();
