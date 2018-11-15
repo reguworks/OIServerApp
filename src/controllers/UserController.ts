@@ -10,14 +10,15 @@ export class UserController {
                 conn.query("select * from users"
                     , function (err, result, fields) {
                         if (err) {
-                            conn.release();
+                            console.log(err);
                             res.json(err);
                         }
                         else {
                             console.log(result);
                             res.json(result);
-                            conn.release();
                         }
+
+                        conn.release();
                     })
             })
         } catch (error) {
@@ -33,14 +34,15 @@ export class UserController {
                 conn.query("INSERT INTO users (id, username) VALUES ('" + id.toString() + "','" + username.toString() + "')"
                     , function (err, result, fields) {
                         if (err) {
-                            conn.release();
+                            console.log(err);
                             res.json(err);
                         }
                         else {
                             console.log(result);
                             res.json(result);
-                            conn.release();
                         }
+
+                        conn.release();
                     })
             })
         } catch (error) {
@@ -56,14 +58,15 @@ export class UserController {
                 conn.query("update users set username='" + username.toString() + "' where id='" + id.toString() + "'"
                     , function (err, result, fields) {
                         if (err) {
-                            conn.release();
+                            console.log(err);
                             res.json(err);
                         }
                         else {
                             console.log(result);
                             res.json(result);
-                            conn.release();
                         }
+
+                        conn.release();
                     })
             })
         } catch (error) {
@@ -79,14 +82,15 @@ export class UserController {
                 conn.query("delete from users where id='" + id.toString() + "'"
                     , function (err, result, fields) {
                         if (err) {
-                            conn.release();
+                            console.log(err);
                             res.json(err);
                         }
                         else {
                             console.log(result);
                             res.json(result);
-                            conn.release();
                         }
+
+                        conn.release();
                     })
             })
         } catch (error) {
