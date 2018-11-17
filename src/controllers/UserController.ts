@@ -98,4 +98,29 @@ export class UserController {
             res.json(error);
         }
     }
+
+    async deleteUserByID(req: Request, res: Response) {
+        let username = req.body.username;
+        let id = req.body.id;
+        try {
+            connection.getConnection(function (err, conn) {
+                conn.query("delete from users where id='" + req.params.id + "'"
+                    , function (err, result, fields) {
+                        if (err) {
+                            console.log(err);
+                            res.json(err);
+                        }
+                        else {
+                            console.log(result);
+                            res.json(result);
+                        }
+
+                        conn.release();
+                    })
+            })
+        } catch (error) {
+            console.log("Error " + error);
+            res.json(error);
+        }
+    }
 }

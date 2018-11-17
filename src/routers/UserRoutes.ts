@@ -9,6 +9,9 @@ export class UserRoutes {
         .post(this.controller.createUser)
         .put(this.controller.updateUser)
         .delete(this.controller.deleteUser)
+
+        app.route('/users/:id')
+        .delete(this.controller.deleteUserByID)
     }
 }
 
