@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, next } from 'express';
 import connection from '../db/db';
 
 export class UserController {
@@ -7,11 +7,13 @@ export class UserController {
     async getAllUsers(req: Request, res: Response) {
         try {
             connection.getConnection(function (err, conn) {
-                conn.query("select * from users"
+                conn.query("CALL user_list();"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
-                            res.json(err);
+                            res.status(400).send({
+                                message: err.message.toString()
+                             });
                         }
                         else {
                             console.log(result);
@@ -21,21 +23,23 @@ export class UserController {
                         conn.release();
                     })
             })
-        } catch (error) {
-            console.log("Error " + error);
-            res.json(error);
+        } catch (err) {
+            console.log("Error " + err);
+            res.status(400).send({
+                message: err.message.toString()
+             });
         }
     }
     async createUser(req: Request, res: Response) {
-        let username = req.body.username;
-        let id = req.body.id;
         try {
             connection.getConnection(function (err, conn) {
-                conn.query("INSERT INTO users (id, username) VALUES ('" + id.toString() + "','" + username.toString() + "')"
+                conn.query("CALL user_insert('" + req.body.username+ "')"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
-                            res.json(err);
+                            res.status(400).send({
+                                message: err.message.toString()
+                             });
                         }
                         else {
                             console.log(result);
@@ -45,21 +49,23 @@ export class UserController {
                         conn.release();
                     })
             })
-        } catch (error) {
-            console.log("Error " + error);
-            res.json(error);
+        } catch (err) {
+            console.log("Error " + err);
+            res.status(400).send({
+                message: err.message.toString()
+             });
         }
     }
     async updateUser(req: Request, res: Response) {
-        let username = req.body.username;
-        let id = req.body.id;
         try {
             connection.getConnection(function (err, conn) {
-                conn.query("update users set username='" + username.toString() + "' where id='" + id.toString() + "'"
+                conn.query("CALL user_update('" + req.body.username+ "','" + req.body.id + "')"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
-                            res.json(err);
+                            res.status(400).send({
+                                message: err.message.toString()
+                             });
                         }
                         else {
                             console.log(result);
@@ -69,21 +75,23 @@ export class UserController {
                         conn.release();
                     })
             })
-        } catch (error) {
-            console.log("Error " + error);
-            res.json(error);
+        } catch (err) {
+            console.log("Error " + err);
+            res.status(400).send({
+                message: err.message.toString()
+             });
         }
     }
     async deleteUser(req: Request, res: Response) {
-        let username = req.body.username;
-        let id = req.body.id;
         try {
             connection.getConnection(function (err, conn) {
-                conn.query("delete from users where id='" + id.toString() + "'"
+                conn.query("CALL user_delete('" + req.body.id + "')"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
-                            res.json(err);
+                            res.status(400).send({
+                                message: err.message.toString()
+                             });
                         }
                         else {
                             console.log(result);
@@ -93,22 +101,24 @@ export class UserController {
                         conn.release();
                     })
             })
-        } catch (error) {
-            console.log("Error " + error);
-            res.json(error);
+        } catch (err) {
+            console.log("Error " + err);
+            res.status(400).send({
+                message: err.message.toString()
+             });
         }
     }
 
     async deleteUserByID(req: Request, res: Response) {
-        let username = req.body.username;
-        let id = req.body.id;
         try {
             connection.getConnection(function (err, conn) {
                 conn.query("delete from users where id='" + req.params.id + "'"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
-                            res.json(err);
+                            res.status(400).send({
+                                message: err.message.toString()
+                             });
                         }
                         else {
                             console.log(result);
@@ -118,9 +128,11 @@ export class UserController {
                         conn.release();
                     })
             })
-        } catch (error) {
-            console.log("Error " + error);
-            res.json(error);
+        } catch (err) {
+            console.log("Error " + err);
+            res.status(400).send({
+                message: err.message.toString()
+             });
         }
     }
 }
