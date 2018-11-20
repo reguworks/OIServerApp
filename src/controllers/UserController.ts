@@ -17,12 +17,23 @@ export class UserController {
     }
     public createUser(req: Request, res: Response) {
         Utils.verifyToken(req, res); 
-        let query  = "CALL user_insert('" + req.body.username + "')";
+        let query  = "CALL user_insert("+
+        "'" + req.body.username + "',"+
+        "'" + req.body.firstName + "',"+
+        "'" + req.body.lastName + "',"+
+        "'" + req.body.password + "'"+
+         ")";
         Utils.executeQuery(req, res, query)   
     }
     public updateUser(req: Request, res: Response) {
         Utils.verifyToken(req, res); 
-        let query  = "CALL user_update('" + req.body.username + "','" + req.body.id + "')";
+        let query  = "CALL user_update(" +
+        "'" + req.body.username + "'," +
+        "'" + req.body.id + "'," +
+        "'" + req.body.firstName + "'," +
+        "'" + req.body.lastName + "'," +
+        "'" + req.body.password + "'" +
+        ")";
         Utils.executeQuery(req, res, query)         
     }
     public deleteUser(req: Request, res: Response) {
@@ -40,7 +51,10 @@ export class UserController {
     public userLogin(req: Request, res: Response) {
         try {
             connection.getConnection(function (err, conn) {
-                conn.query("CALL user_login('" + req.body.username + "')"
+                conn.query("CALL user_login(" +
+                "'" + req.body.username + "'," +
+                "'" + req.body.password + "'" +
+                ")"
                     , function (err, result, fields) {
                         if (err) {
                             console.log(err);
