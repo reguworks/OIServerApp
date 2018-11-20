@@ -12,6 +12,9 @@ export class UserRoutes {
 
         app.route('/users/:id')
         .delete(this.controller.deleteUserByID)
+
+        app.route('/users/login')
+        .post(this.controller.userLogin)
     }
 }
 
