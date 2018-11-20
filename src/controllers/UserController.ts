@@ -1,226 +1,43 @@
 import { Request, Response, next } from 'express';
 import connection from '../db/db';
 import * as jwt from 'jsonwebtoken';
+import { Utils } from '../utils/utils'
 
-export const secret: string = '2541';
+import secret  from '../utils/secret'
 
 export class UserController {
-
+    //private query: string = "";
+    
     constructor() {
     }
-    async getAllUsers(req: Request, res: Response) {
-        let token = req.headers.authorization;
-        let tokenStr;
-        try {
-            if(token != undefined){
-                tokenStr = token.substr(7, token.length);
-            }
-
-            console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
-
-        } catch (err) {
-            res.status(400).send({
-                message: err.message.toString()
-            });
-            return;
-        }
-        try {
-            connection.getConnection(function (err, conn) {
-                conn.query("CALL user_list();"
-                    , function (err, result, fields) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send({
-                                message: err.message.toString()
-                            });
-                        }
-                        else {
-                            console.log(result);
-                            res.json(result);
-                        }
-
-                        conn.release();
-                    })
-            })
-        } catch (err) {
-            console.log("Error " + err);
-            res.status(400).send({
-                message: err.message.toString()
-            });
-        }
+    public getAllUsers(req: Request, res: Response) {
+        Utils.verifyToken(req, res);
+        let query = "CALL user_list();";
+        Utils.executeQuery(req, res, query)        
     }
-    async createUser(req: Request, res: Response) {
-        let token = req.headers.authorization;
-        let tokenStr;
-        try {
-            if(token != undefined){
-                tokenStr = token.substr(7, token.length);
-            }
-
-            console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
-
-        } catch (err) {
-            res.status(400).send({
-                message: err.message.toString()
-            });
-            return;
-        }
-        try {
-            connection.getConnection(function (err, conn) {
-                conn.query("CALL user_insert('" + req.body.username + "')"
-                    , function (err, result, fields) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send({
-                                message: err.message.toString()
-                            });
-                        }
-                        else {
-                            console.log(result);
-                            res.json(result);
-                        }
-
-                        conn.release();
-                    })
-            })
-        } catch (err) {
-            console.log("Error " + err);
-            res.status(400).send({
-                message: err.message.toString()
-            });
-        }
+    public createUser(req: Request, res: Response) {
+        Utils.verifyToken(req, res); 
+        let query  = "CALL user_insert('" + req.body.username + "')";
+        Utils.executeQuery(req, res, query)   
     }
-    async updateUser(req: Request, res: Response) {
-        let token = req.headers.authorization;
-        let tokenStr;
-        try {
-            if(token != undefined){
-                tokenStr = token.substr(7, token.length);
-            }
-
-            console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
-
-        } catch (err) {
-            res.status(400).send({
-                message: err.message.toString()
-            });
-            return;
-        }
-        try {
-            connection.getConnection(function (err, conn) {
-                conn.query("CALL user_update('" + req.body.username + "','" + req.body.id + "')"
-                    , function (err, result, fields) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send({
-                                message: err.message.toString()
-                            });
-                        }
-                        else {
-                            console.log(result);
-                            res.json(result);
-                        }
-
-                        conn.release();
-                    })
-            })
-        } catch (err) {
-            console.log("Error " + err);
-            res.status(400).send({
-                message: err.message.toString()
-            });
-        }
+    public updateUser(req: Request, res: Response) {
+        Utils.verifyToken(req, res); 
+        let query  = "CALL user_update('" + req.body.username + "','" + req.body.id + "')";
+        Utils.executeQuery(req, res, query)         
     }
-    async deleteUser(req: Request, res: Response) {
-        let token = req.headers.authorization;
-        let tokenStr;
-        try {
-            if(token != undefined){
-                tokenStr = token.substr(7, token.length);
-            }
-
-            console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
-
-        } catch (err) {
-            res.status(400).send({
-                message: err.message.toString()
-            });
-            return;
-        }
-        try {
-            connection.getConnection(function (err, conn) {
-                conn.query("CALL user_delete('" + req.body.id + "')"
-                    , function (err, result, fields) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send({
-                                message: err.message.toString()
-                            });
-                        }
-                        else {
-                            console.log(result);
-                            res.json(result);
-                        }
-
-                        conn.release();
-                    })
-            })
-        } catch (err) {
-            console.log("Error " + err);
-            res.status(400).send({
-                message: err.message.toString()
-            });
-        }
+    public deleteUser(req: Request, res: Response) {
+        Utils.verifyToken(req, res); 
+        let query  = "CALL user_delete('" + req.body.id + "')";
+        Utils.executeQuery(req, res, query) 
     }
 
-    async deleteUserByID(req: Request, res: Response) {
-        let token = req.headers.authorization;
-        let tokenStr;
-        try {
-            if(token != undefined){
-                tokenStr = token.substr(7, token.length);
-            }
-
-            console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
-
-        } catch (err) {
-            res.status(400).send({
-                message: err.message.toString()
-            });
-            return;
-        }
-        try {
-            connection.getConnection(function (err, conn) {
-                conn.query("CALL user_delete('" + req.body.id + "')"
-                    , function (err, result, fields) {
-                        if (err) {
-                            console.log(err);
-                            res.status(400).send({
-                                message: err.message.toString()
-                            });
-                        }
-                        else {
-                            console.log(result);
-                            res.json(result);
-                        }
-
-                        conn.release();
-                    })
-            })
-        } catch (err) {
-            console.log("Error " + err);
-            res.status(400).send({
-                message: err.message.toString()
-            });
-        }
+    public deleteUserByID(req: Request, res: Response) {
+        Utils.verifyToken(req, res); 
+        let query  = "CALL user_delete('" + req.params.id + "')"
+        Utils.executeQuery(req, res, query) 
     }
 
-    async userLogin(req: Request, res: Response) {
+    public userLogin(req: Request, res: Response) {
         try {
             connection.getConnection(function (err, conn) {
                 conn.query("CALL user_login('" + req.body.username + "')"
