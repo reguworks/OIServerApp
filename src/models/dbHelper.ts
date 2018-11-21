@@ -1,9 +1,9 @@
 import { Request, Response, next } from 'express';
-import secret  from '../utils/secret'
+import secret  from '../settings/secret'
 import * as jwt from 'jsonwebtoken';
 import connection from '../settings/db';
 
-export class Utils {
+export class DBHelper {
     public static verifyToken(req: Request, res: Response) {
         let token = req.headers.authorization;
         let tokenStr;

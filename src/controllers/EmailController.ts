@@ -1,5 +1,5 @@
 import { Request, Response, next } from 'express';
-import { Mailer } from '../mailer/mailer';
+import { Mailer } from '../mailer';
 import { Message } from '../models/message'
 
 

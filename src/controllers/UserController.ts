@@ -1,9 +1,9 @@
 import { Request, Response, next } from 'express';
 import connection from '../settings/db';
 import * as jwt from 'jsonwebtoken';
-import { Utils } from '../utils/utils'
+import { DBHelper } from '../models/dbHelper'
 
-import secret  from '../utils/secret'
+import secret  from '../settings/secret'
 
 export class UserController {
     //private query: string = "";
@@ -11,22 +11,22 @@ export class UserController {
     constructor() {
     }
     public getAllUsers(req: Request, res: Response) {
-        Utils.verifyToken(req, res);
+        DBHelper.verifyToken(req, res);
         let query = "CALL user_list();";
-        Utils.executeQuery(req, res, query)        
+        DBHelper.executeQuery(req, res, query)        
     }
     public createUser(req: Request, res: Response) {
-        Utils.verifyToken(req, res); 
+        DBHelper.verifyToken(req, res); 
         let query  = "CALL user_insert("+
         "'" + req.body.username + "',"+
         "'" + req.body.firstName + "',"+
         "'" + req.body.lastName + "',"+
         "'" + req.body.password + "'"+
          ")";
-        Utils.executeQuery(req, res, query)   
+         DBHelper.executeQuery(req, res, query)   
     }
     public updateUser(req: Request, res: Response) {
-        Utils.verifyToken(req, res); 
+        DBHelper.verifyToken(req, res); 
         let query  = "CALL user_update(" +
         "'" + req.body.username + "'," +
         "'" + req.body.id + "'," +
@@ -34,18 +34,18 @@ export class UserController {
         "'" + req.body.lastName + "'," +
         "'" + req.body.password + "'" +
         ")";
-        Utils.executeQuery(req, res, query)         
+        DBHelper.executeQuery(req, res, query)         
     }
     public deleteUser(req: Request, res: Response) {
-        Utils.verifyToken(req, res); 
+        DBHelper.verifyToken(req, res); 
         let query  = "CALL user_delete('" + req.body.id + "')";
-        Utils.executeQuery(req, res, query) 
+        DBHelper.executeQuery(req, res, query) 
     }
 
     public deleteUserByID(req: Request, res: Response) {
-        Utils.verifyToken(req, res); 
+        DBHelper.verifyToken(req, res); 
         let query  = "CALL user_delete('" + req.params.id + "')"
-        Utils.executeQuery(req, res, query) 
+        DBHelper.executeQuery(req, res, query) 
     }
 
     public userLogin(req: Request, res: Response) {
