@@ -3,11 +3,13 @@ import * as bodyParser from 'body-parser';
 import * as cors from "cors";
 
 import { UserRoutes } from './routers/UserRoutes';
+import { EmailRoutes } from './routers/Emailroutes';
 
 class App {
     public app: express.Application;
     
     public userRoutes: UserRoutes = new UserRoutes();
+    public emailRoutes: EmailRoutes = new EmailRoutes();
 
     constructor() {
         this.app = express();
@@ -20,6 +22,7 @@ class App {
         this.app.use(cors());
 
         this.userRoutes.routes(this.app);
+        this.emailRoutes.routes(this.app);
     }
 }
 
