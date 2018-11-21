@@ -1,9 +1,9 @@
 import { Request, Response, next } from 'express';
-import connection from '../settings/db';
+import connection from '../../settings/db';
 import * as jwt from 'jsonwebtoken';
 import { DBHelper } from '../models/dbHelper'
 
-import secret  from '../settings/secret'
+import secret  from '../../settings/secret'
 
 export class UserController {
     //private query: string = "";

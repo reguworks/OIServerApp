@@ -1,7 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import { Message } from './models/message'
 import { Request, Response, next } from 'express';
-import * as mailerSettings from './settings/mailer-user';
+import * as mailerSettings from '../settings/mailer-user';
 
 export class Mailer {
 
