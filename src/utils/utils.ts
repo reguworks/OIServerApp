@@ -1,7 +1,7 @@
 import { Request, Response, next } from 'express';
 import secret  from '../utils/secret'
 import * as jwt from 'jsonwebtoken';
-import connection from '../db/db';
+import connection from '../settings/db';
 
 export class Utils {
     public static verifyToken(req: Request, res: Response) {

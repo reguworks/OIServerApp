@@ -1,28 +1,33 @@
 import * as nodemailer from 'nodemailer';
 import { Message } from '../models/message'
 import { Request, Response, next } from 'express';
+import * as mailerSettings from '../settings/mailer-user';
 
 export class Mailer {
 
     public sendMail(message: Message, res: Response) {
-
-        var smtpConfig = {
-            host: 'smtp.abv.bg',
-            port: 465,
+        let smtpConfig = {
+            host: mailerSettings.host,
+            port: mailerSettings.port,
             secure: true, // use SSL
             auth: {
-                user: 'mlipcinski@abv.bg',
-                pass: 'Ml254163!'
+                user: mailerSettings.sender,
+                pass: mailerSettings.password
             }
         };
 
         let transporter = nodemailer.createTransport(smtpConfig);
 
         let mailOptions = {
-            from: 'mlipcinski@abv.bg',
-            to: 'mlipcinski@abv.bg',
-            subject: 'Query for Optimal Insurance',
-            text: 'First Name: ' + message.firstName + '\n' + 'Last Name: ' + message.lastName + '\n' + 'Email: ' + message.email + '\n' + 'Phone: ' + message.phone + '\n' + 'Message: ' + message.message
+            from: mailerSettings.sender,
+            to: mailerSettings.receiver,
+            subject: mailerSettings.subject,
+            text: 
+                'First Name: ' + message.firstName + '\n' + 
+                'Last Name: ' + message.lastName + '\n' + 
+                'Email: ' + message.email + '\n' + 
+                'Phone: ' + message.phone + '\n' + 
+                'Message: ' + message.message
         };
 
         transporter.sendMail(mailOptions, function (error, info) {

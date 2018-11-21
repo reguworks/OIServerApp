@@ -1,5 +1,5 @@
 import { Request, Response, next } from 'express';
-import connection from '../db/db';
+import connection from '../settings/db';
 import * as jwt from 'jsonwebtoken';
 import { Utils } from '../utils/utils'
 
