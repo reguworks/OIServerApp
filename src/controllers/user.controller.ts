@@ -1,7 +1,7 @@
 import { Request, Response, next } from 'express';
-import connection from '../models/db';
+import connection from '../database/db';
 import * as jwt from 'jsonwebtoken';
-import { DBHelper } from '../models/dbHelper'
+import { DBHelper } from './database-helper.controller'
 import { Logger } from '../logger';
 
 const config = require('../../settings/config.json');

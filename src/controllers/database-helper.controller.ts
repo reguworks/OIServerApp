@@ -1,7 +1,7 @@
 import { Request, Response, next } from 'express';
 const config = require('../../settings/config.json');
 import * as jwt from 'jsonwebtoken';
-import connection from './db';
+import connection from '../database/db';
 import { Logger } from '../logger';
 
 

@@ -2,15 +2,15 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from "cors";
 
-import { UserRoutes } from './routers/UserRoutes';
-import { EmailRoutes } from './routers/Emailroutes';
+import { UserRoutes } from './routes/user.route';
+import { EmailRoutes } from './routes/email.route';
 import { Logger } from './logger';
 
 class App {
     public app: express.Application;
     
-    public userRoutes: UserRoutes = new UserRoutes();
-    public emailRoutes: EmailRoutes = new EmailRoutes();
+    private userRoutes: UserRoutes = new UserRoutes();
+    private emailRoutes: EmailRoutes = new EmailRoutes();
 
     constructor() {
         this.app = express();

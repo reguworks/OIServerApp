@@ -1,4 +1,4 @@
-import { EmailController } from '../controllers/EmailController';
+import { EmailController } from '../controllers/email.controller';
 
 export class EmailRoutes {
     public controller: EmailController = new EmailController();

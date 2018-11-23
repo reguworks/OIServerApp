@@ -20,7 +20,7 @@ export class Logger{
           });
         
 
-        var fileTransport = new (DailyRotateFile)({
+        let fileTransport = new (DailyRotateFile)({
             filename: './logs/OIServerApp-%DATE%.log',
             datePattern: 'YYYY-MM-DD',//'YYYY-MM-DD-HH',
             zippedArchive: false,
