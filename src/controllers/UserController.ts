@@ -68,11 +68,7 @@ export class UserController {
                             Logger.info('Login: ' + req.body.username + ' successfull!');
                             res.status(200).send({
                                 message: 'Login successful!',
-                                token: jwt.sign({ username: req.body.username }, config.secret, {
-
-                                    expiresIn: '1h' // expires in 1 hour
-            
-                                     })
+                                token: jwt.sign({ username: req.body.username }, config.secret)
                             });
                             
                         }
