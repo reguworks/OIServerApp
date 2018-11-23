@@ -1,27 +1,28 @@
 import * as nodemailer from 'nodemailer';
 import { Message } from './models/message'
 import { Request, Response, next } from 'express';
-import * as mailerSettings from '../settings/mailer-user';
+
+const config = require('../settings/config.json');
 
 export class Mailer {
 
     public sendMail(message: Message, res: Response) {
         let smtpConfig = {
-            host: mailerSettings.host,
-            port: mailerSettings.port,
-            secure: true, // use SSL
+            host: config['email-contact'].host,
+            port: config['email-contact'].port,
+            secure: config['email-contact'].secure,
             auth: {
-                user: mailerSettings.sender,
-                pass: mailerSettings.password
+                user: config['email-contact'].sender,
+                pass: config['email-contact'].password
             }
         };
 
         let transporter = nodemailer.createTransport(smtpConfig);
 
         let mailOptions = {
-            from: mailerSettings.sender,
-            to: mailerSettings.receiver,
-            subject: mailerSettings.subject,
+            from: config['email-contact'].sender,
+            to: config['email-contact'].receiver,
+            subject: config['email-contact'].subject,
             text: 
                 'First Name: ' + message.firstName + '\n' + 
                 'Last Name: ' + message.lastName + '\n' + 

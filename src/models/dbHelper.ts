@@ -1,7 +1,7 @@
 import { Request, Response, next } from 'express';
-import secret  from '../../settings/secret'
+const config = require('../../settings/config.json');
 import * as jwt from 'jsonwebtoken';
-import connection from '../../settings/db';
+import connection from './db';
 
 export class DBHelper {
     public static verifyToken(req: Request, res: Response) {
@@ -13,7 +13,7 @@ export class DBHelper {
             }
 
             console.log(token);
-            var decoded = jwt.verify(tokenStr, secret);
+            var decoded = jwt.verify(tokenStr, config.secret);
 
         } catch (err) {
             res.status(400).send({
