@@ -1,7 +1,7 @@
 import { Request, Response, next } from 'express';
 import { Mailer } from '../mailer';
 import { Message } from '../models/message'
-
+import { Logger } from '../logger';
 
 export class EmailController {
     constructor() {
@@ -18,6 +18,13 @@ export class EmailController {
         message.phone = req.body.phone;
         message.message = req.body.message;
 
+        Logger.info('New email message request received: '
+         + req.body.firstName + ', '
+         + req.body.lastName + ', '
+         + req.body.email + ', '
+         + req.body.phone + ', '
+         + req.body.message);
+         
         mailer.sendMail(message, res); 
     }
 }

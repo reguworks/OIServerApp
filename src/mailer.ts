@@ -1,6 +1,7 @@
 import * as nodemailer from 'nodemailer';
 import { Message } from './models/message'
 import { Request, Response, next } from 'express';
+import { Logger } from './logger';
 
 const config = require('../settings/config.json');
 
@@ -33,12 +34,14 @@ export class Mailer {
 
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {
-                console.log(error.message);
+                Logger.error('Error while sending an email: ' + error.message.toString());
                 res.status(400).send({
                     message: error.message.toString()
                 });
+                
             }
             else {
+                Logger.info('Email successfully sent.')
                 res.json(info.response.toString());
             }
         });

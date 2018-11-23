@@ -4,6 +4,7 @@ import * as cors from "cors";
 
 import { UserRoutes } from './routers/UserRoutes';
 import { EmailRoutes } from './routers/Emailroutes';
+import { Logger } from './logger';
 
 class App {
     public app: express.Application;
@@ -13,7 +14,8 @@ class App {
 
     constructor() {
         this.app = express();
-        this.config();    
+        this.config();
+        Logger.Init();  
     }
 
     private config(): void{

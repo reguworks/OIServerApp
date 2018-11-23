@@ -2,6 +2,7 @@ import { Request, Response, next } from 'express';
 import connection from '../models/db';
 import * as jwt from 'jsonwebtoken';
 import { DBHelper } from '../models/dbHelper'
+import { Logger } from '../logger';
 
 const config = require('../../settings/config.json');
 
@@ -50,6 +51,7 @@ export class UserController {
 
     public userLogin(req: Request, res: Response) {
         try {
+            Logger.info('User: ' + req.body.username + ' attempting login');
             connection.getConnection(function (err, conn) {
                 conn.query("CALL user_login(" +
                 "'" + req.body.username + "'," +
@@ -57,14 +59,13 @@ export class UserController {
                 ")"
                     , function (err, result, fields) {
                         if (err) {
-                            console.log(err);
                             res.status(400).send({
                                 message: err.message.toString()
                             });
+                            Logger.error('User: ' + req.body.username + ' was unable login: ' + err.message.toString());
                         }
                         else {
-                            console.log(result);
-                            //res.json(result);
+                            Logger.info('Login: ' + req.body.username + ' successfull!');
                             res.status(200).send({
                                 message: 'Login successful!',
                                 token: jwt.sign({ username: req.body.username }, config.secret, {
@@ -73,13 +74,14 @@ export class UserController {
             
                                      })
                             });
+                            
                         }
 
                         conn.release();
                     })
             })
         } catch (err) {
-            console.log("Error " + err);
+            Logger.error('Error while logging in (public userLogin): ' + err.message.toString());
             res.status(400).send({
                 message: err.message.toString()
             });
